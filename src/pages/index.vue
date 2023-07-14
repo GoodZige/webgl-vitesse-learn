@@ -10,7 +10,6 @@ function go() {
   if (name.value)
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
-
 const { t } = useI18n()
 </script>
 

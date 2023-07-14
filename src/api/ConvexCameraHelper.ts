@@ -16,7 +16,7 @@ class ConvexCameraHelper extends THREE.Mesh {
     const geometry = new THREE.BufferGeometry()
     const material = new THREE.MeshBasicMaterial({ color: 0x00FF00 })
 
-    const vertices = []
+    const vertices: number[] = []
     const colors = []
 
     const pointMap = {}
@@ -66,8 +66,7 @@ class ConvexCameraHelper extends THREE.Mesh {
           new THREE.Vector3(
             positionArray[i - 2],
             positionArray[i - 1],
-            positionArray[i],
-          ),
+            positionArray[i])
         )
       }
     })

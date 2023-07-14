@@ -6,6 +6,8 @@ import generateSitemap from 'vite-ssg-sitemap'
 import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'vite-plugin-vue-markdown'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -43,7 +45,13 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动导入图标组件
+        IconsResolver({
+          prefix: 'Icon',
+        })
+      ],
       imports: [
         'vue',
         'vue-router',
@@ -51,22 +59,36 @@ export default defineConfig({
         '@vueuse/head',
         '@vueuse/core',
       ],
-      dts: 'src/auto-imports.d.ts',
+      dts: 'src/typings/auto-imports.d.ts',
       dirs: [
         'src/composables',
         'src/stores',
       ],
       vueTemplate: true,
+      eslintrc: {
+        enabled: true, // Default `false`
+        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+        globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+      }
     }),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        // 自动注册图标组件
+        IconsResolver({
+          enabledCollections: ['ep'],
+        }),
+        ElementPlusResolver(),
+      ],
       // allow auto load markdown components under `./src/components/`
       extensions: ['vue', 'md'],
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      dts: 'src/components.d.ts',
+      dts: 'src/typings/components.d.ts',
+    }),
+    Icons({
+      autoInstall: true,
     }),
 
     // https://github.com/antfu/unocss

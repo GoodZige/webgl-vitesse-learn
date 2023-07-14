@@ -5,80 +5,71 @@ defineOptions({
 
 const isCollapse = ref(true)
 const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+  // console.log(key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+  // console.log(key, keyPath)
+}
+const selectItem = (index: any, indexPath: any, item: any, routeResult: any) => {
+  console.log(routeResult);
+
 }
 </script>
 
 <template>
-  <main px-4 py-10 text="center gray-700 dark:gray-200">
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-      <el-radio-button :label="false">
-        expand
-      </el-radio-button>
-      <el-radio-button :label="true">
-        collapse
-      </el-radio-button>
-    </el-radio-group>
-    <el-menu
-      default-active="2"
-      class="el-menu-vertical-demo"
-      :collapse="isCollapse"
-      @open="handleOpen"
-      @close="handleClose"
-    >
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon><location /></el-icon>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item-group>
+  <main h-screen text="center gray-700 dark:gray-200">
+    <div flex w20 h-screen>
+      <el-menu default-active="/" class="el-menu-vertical-demo" :collapse="false" @open="handleOpen" @close="handleClose"
+        :router="true" @select="selectItem">
+        <el-menu-item index="/">
+          <el-icon><i-ep-home-filled /></el-icon>
           <template #title>
-            <span>Group One</span>
+            Home
           </template>
-          <el-menu-item index="1-1">
-            item one
-          </el-menu-item>
-          <el-menu-item index="1-2">
-            item two
-          </el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Two">
-          <el-menu-item index="1-3">
-            item three
-          </el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="1-4">
+        </el-menu-item>
+        <el-sub-menu index="2">
           <template #title>
-            <span>item four</span>
+            <el-icon><i-ep-location /></el-icon>
+            <span>Navigator One</span>
           </template>
-          <el-menu-item index="1-4-1">
-            item one
-          </el-menu-item>
+          <el-menu-item-group>
+            <template #title>
+              <span>Group One</span>
+            </template>
+            <el-menu-item index="/example/frustum">
+              frustum
+            </el-menu-item>
+            <el-menu-item index="/hi/1-2">
+              item two
+            </el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="Group Two">
+            <el-menu-item index="1-3">
+              item three
+            </el-menu-item>
+          </el-menu-item-group>
         </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
-        <template #title>
-          Navigator Two
-        </template>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <el-icon><document /></el-icon>
-        <template #title>
-          Navigator Three
-        </template>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon><setting /></el-icon>
-        <template #title>
-          Navigator Four
-        </template>
-      </el-menu-item>
-    </el-menu>
-    <RouterView />
+        <el-menu-item index="3">
+          <el-icon><i-ep-menu /></el-icon>
+          <template #title>
+            Navigator Two
+          </template>
+        </el-menu-item>
+        <el-menu-item index="4" disabled>
+          <el-icon><i-ep-document /></el-icon>
+          <template #title>
+            Navigator Three
+          </template>
+        </el-menu-item>
+        <el-menu-item index="5">
+          <el-icon><i-ep-setting /></el-icon>
+          <template #title>
+            Navigator Four
+          </template>
+        </el-menu-item>
+      </el-menu>
+      <RouterView />
+    </div>
     <TheFooter />
     <div mx-auto mt-5 text-center text-sm opacity-50>
       [Home Layout]

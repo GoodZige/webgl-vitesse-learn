@@ -35,5 +35,12 @@
       "@vue-macros/volar/define-slots"
     ]
   },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/typings/auto-imports.d.ts" // 引入到这里
+  ],
   "exclude": ["dist", "node_modules", "cypress"]
 }
