@@ -12,14 +12,18 @@ import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry.js'
 const _vector = /* @__PURE__ */ new THREE.Vector3()
 
 class ConvexCameraHelper extends THREE.Mesh {
-  constructor(matrixWorld, projectionMatrixInverse) {
+  pointMap: { [key: string]: number[] }
+  projectionMatrixInverse: THREE.Matrix4
+  type: string
+  constructor(matrixWorld:THREE.Matrix4, projectionMatrixInverse:THREE.Matrix4) {
     const geometry = new THREE.BufferGeometry()
     const material = new THREE.MeshBasicMaterial({ color: 0x00FF00 })
 
     const vertices: number[] = []
     const colors = []
 
-    const pointMap = {}
+    type PointMap = {[key:string]:number[]}
+    const pointMap:PointMap = {}
 
     addPoint('n1')
     addPoint('n2')
@@ -28,7 +32,7 @@ class ConvexCameraHelper extends THREE.Mesh {
 
     addPoint('p')
 
-    function addPoint(id) {
+    function addPoint(id: string) {
       vertices.push(0, 0, 0)
       colors.push(0, 0, 0)
 
@@ -58,9 +62,9 @@ class ConvexCameraHelper extends THREE.Mesh {
   }
 
   // n1 n2 n3 n4 p
-  drawConvexCameraHelper(positionArray) {
-    const pointV3Array = []
-    positionArray.forEach((e, i) => {
+  drawConvexCameraHelper(positionArray: any[] | THREE.TypedArray) {
+    const pointV3Array: THREE.Vector3[] = []
+    positionArray.forEach((e: any, i: number) => {
       if ((i + 1) % 3 === 0) {
         pointV3Array.push(
           new THREE.Vector3(
@@ -79,17 +83,17 @@ class ConvexCameraHelper extends THREE.Mesh {
       .map(e => e.sub(p)) // 向量
 
     const angle_pn1_pn3 = p_n1.angleTo(p_n3)
-    const SEGEMENT = 10
-    const angle_segement = angle_pn1_pn3 / SEGEMENT
+    const SEGMENT = 10
+    const angle_segment = angle_pn1_pn3 / SEGMENT
 
-    const arcGroup = []
-    const drawArcPoints = (v1, v2) => {
+    const arcGroup: THREE.Vector3[] = []
+    const drawArcPoints = (v1: THREE.Vector3, v2: THREE.Vector3) => {
       const points = []
       const nextV = v1.clone()
       const normalV = new THREE.Vector3().crossVectors(v1, v2).normalize()
-      for (let i = 0; i < SEGEMENT; i++) {
+      for (let i = 0; i < SEGMENT; i++) {
         // nextV.applyAxisAngle(normalV, -0.1).normalize().multiplyScalar(r) ; //得到旋转后的向量
-        nextV.applyAxisAngle(normalV, angle_segement) // 得到旋转后的向量
+        nextV.applyAxisAngle(normalV, angle_segment) // 得到旋转后的向量
         const track_p = new THREE.Vector3().addVectors(nextV, p) // 得到旋转后在弧面上的点
         arcGroup.push(track_p)
         points.push(track_p)
@@ -131,12 +135,13 @@ class ConvexCameraHelper extends THREE.Mesh {
   }
 
   dispose() {
-    this.geometry.dispose()
-    this.material.dispose()
+    this.geometry.dispose();
+    (this.material as THREE.Material).dispose()
+    
   }
 }
 
-function setPoint(point, pointMap, geometry, matrixWorld, projectionMatrixInverse, x, y, z) {
+function setPoint(point: string, pointMap: { [x: string]: any }, geometry: THREE.BufferGeometry<THREE.NormalBufferAttributes>, matrixWorld: THREE.Matrix4, projectionMatrixInverse: THREE.Matrix4, x: number, y: number, z: number) {
   // _vector.set( x, y, z ).unproject( camera );
   _vector.set(x, y, z).applyMatrix4(projectionMatrixInverse).applyMatrix4(matrixWorld)
   const points = pointMap[point]
