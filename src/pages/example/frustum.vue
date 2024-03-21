@@ -4,7 +4,6 @@ import { MapControls } from "three/examples/jsm/controls/MapControls";
 
 import { ConvexCameraHelper } from "../../api/ConvexCameraHelper";
 onMounted(() => {
-  console.log(1111111111111);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     75,
@@ -19,12 +18,6 @@ onMounted(() => {
 
   const matrixWorld = camera.matrixWorld.clone();
   const projectionMatrixInverse = camera.projectionMatrixInverse.clone();
-
-  // let meshCameraHelper = new MeshCameraHelper(
-  //   matrixWorld,
-  //   projectionMatrixInverse
-  // );
-  // scene.add(meshCameraHelper);
 
   let convexCameraHelper = new ConvexCameraHelper(
     matrixWorld,

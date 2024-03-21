@@ -30,43 +30,33 @@ const selectItem = (index: any, indexPath: any, item: any, routeResult: any) => 
         <el-sub-menu index="2">
           <template #title>
             <el-icon><i-ep-location /></el-icon>
-            <span>Navigator One</span>
+            <span>Lab</span>
           </template>
           <el-menu-item-group>
             <template #title>
-              <span>Group One</span>
+              <span>Webgl</span>
             </template>
             <el-menu-item index="/example/frustum">
               frustum
             </el-menu-item>
-            <el-menu-item index="/hi/1-2">
-              item two
+            <el-menu-item index="/example/shapeTexture">
+              shapeTexture
             </el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">
-              item three
+          <el-menu-item-group title="TS">
+            <el-menu-item index="/example/decorator">
+              decorator
+            </el-menu-item>
+            <el-menu-item index="/example/webfont">
+              webfont
+            </el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="UI">
+            <el-menu-item index="/example/datePicker">
+              datePicker
             </el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
-        <el-menu-item index="3">
-          <el-icon><i-ep-menu /></el-icon>
-          <template #title>
-            Navigator Two
-          </template>
-        </el-menu-item>
-        <el-menu-item index="4" disabled>
-          <el-icon><i-ep-document /></el-icon>
-          <template #title>
-            Navigator Three
-          </template>
-        </el-menu-item>
-        <el-menu-item index="5">
-          <el-icon><i-ep-setting /></el-icon>
-          <template #title>
-            Navigator Four
-          </template>
-        </el-menu-item>
       </el-menu>
       <RouterView />
     </div>

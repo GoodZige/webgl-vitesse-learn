@@ -156,7 +156,11 @@ export default defineConfig({
     }),
 
     // https://github.com/feat-agency/vite-plugin-webfont-dl
-    WebfontDownload(),
+    WebfontDownload([
+      'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap',
+      'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap',
+      'https://fonts.googleapis.com/css2?family=Raleway&display=swap'
+    ]),
 
     // https://github.com/webfansplz/vite-plugin-vue-devtools
     VueDevTools(),

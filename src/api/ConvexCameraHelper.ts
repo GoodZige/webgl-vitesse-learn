@@ -83,7 +83,7 @@ class ConvexCameraHelper extends THREE.Mesh {
       .map(e => e.sub(p)) // 向量
 
     const angle_pn1_pn3 = p_n1.angleTo(p_n3)
-    const SEGMENT = 10
+    const SEGMENT = 100
     const angle_segment = angle_pn1_pn3 / SEGMENT
 
     const arcGroup: THREE.Vector3[] = []
@@ -106,7 +106,7 @@ class ConvexCameraHelper extends THREE.Mesh {
     const pointArray_24 = drawArcPoints(p_n2, p_n4)
     const pointArray_34 = drawArcPoints(p_n3, p_n4)
 
-    console.log(pointArray_12, pointArray_34)
+    // console.log(pointArray_12, pointArray_34)
     for (let i = 0; i < pointArray_12.length; i++)
       drawArcPoints(pointArray_12[i], pointArray_34[i])
 
