@@ -55,6 +55,12 @@ const selectItem = (index: any, indexPath: any, item: any, routeResult: any) => 
             <el-menu-item index="/example/datePicker">
               datePicker
             </el-menu-item>
+            <el-menu-item index="/example/myElDatePicker">
+              myElDatePicker
+            </el-menu-item>
+            <el-menu-item index="/example/zigeLib">
+              zigeLib
+            </el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
       </el-menu>

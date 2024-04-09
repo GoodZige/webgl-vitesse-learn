@@ -8,3 +8,8 @@ node_modules
 .idea/
 *.log
 cypress/downloads
+
+*storybook.log
+
+node_modules.zip
+node_modules_clone.zip

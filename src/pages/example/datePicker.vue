@@ -2,12 +2,6 @@
 import { DatePicker } from '@kousum/semi-ui-vue';
 // import React from 'react';
 // import { DatePicker } from '@douyinfe/semi-ui';
-let a1 = ref<number | null>(null)
-onMounted(() => {
-  a1.value = 999
-
-  
-})
 
 </script>
 
